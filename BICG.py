@@ -13,8 +13,7 @@ import numpy as np
 # A similar approach with different compile options should permit creating static .o library for linux using g++
 
 class bicg:
-    def __init__(self, dllpath='IterativeSparseSolver.dll'):
-        print(dllpath.exists())
+    def __init__(self, dllpath='C://Users//Haoli Yin//Documents//eceproj6//IterativeSparseSolver.dll'):
         self.mydll = cdll.LoadLibrary(dllpath)
 
     def Solve(self, r, c, I, J, V, b, tol = 1e-5, maxiter=1000, itol=1):

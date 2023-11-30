@@ -18,11 +18,12 @@ mrsps = project_data['mrsps']
 
 
 # Perform Laplacian Interpolation
+# output is a [r, c, d] nested list
 phi = laplacianInterpolation(mrsps['dim'][0], mrsps['dim'][1], mrsps['dim'][2], mrsps['nds'], mrsps['data'])
-
+phi = np.array(phi)
 
 # Ensure dimensions match
-original_image = mr['data']
+original_image = np.array(mr['data'])
 assert phi.shape == original_image.shape, "Shape mismatch between the interpolated and original images."
 
 # Calculate mean absolute difference
