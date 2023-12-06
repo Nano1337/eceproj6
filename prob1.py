@@ -6,13 +6,12 @@ from scipy import sparse
 from scipy.sparse.linalg import spsolve
 
 from LaplacianInterpolation import laplacianInterpolation
-
+from DisplayVolume import *
 
 # Load Project6.json
 with open('Project6.json', 'r') as file:
     project_data = json.load(file)
 
-# Extract data from project_data
 mr = project_data['mr']
 mrsps = project_data['mrsps']
 
@@ -30,9 +29,12 @@ assert phi.shape == original_image.shape, "Shape mismatch between the interpolat
 mean_abs_difference = np.mean(np.abs(phi - original_image))
 print(f"Mean Absolute Difference: {mean_abs_difference}")
 
-import matplotlib.pyplot as plt
+# Display the image with display volume
+d = DisplayVolume()
+# Set the image with default voxel size
+voxsz = project_data['mr']['voxsz']  # Adjust as per your actual voxel size
+d.SetImage(phi, voxsz)
 
-# Display the interpolated image
-plt.imshow(phi[:, :, int(phi.shape[2] / 2)], cmap='gray')  # Displaying a middle slice
-plt.title("Interpolated MR Image")
-plt.show()
+# Display the image
+d.Display()
+
